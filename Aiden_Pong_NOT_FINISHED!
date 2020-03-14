@@ -1,0 +1,114 @@
+import turtle
+import time
+
+window = turtle.Screen()
+class screen:
+		
+	def __init__(self, width, height, bgc, title):
+		
+		self.width = width
+		self.height = height
+		self.bgc = bgc
+		self.title = title
+		self.window = turtle.Screen()
+		self.window.bgcolor(bgc)
+		self.window.title(title)
+		self.window.setup(width=self.width, height=self.height)
+        
+win = screen(800, 600, "#4AD0E9", "Pong by Hawken")
+
+class Paddle1:
+	
+	def __init__(self, color, px, py, shape="square", width=5, len=1):
+		
+		self.shape = shape
+		self.color = color
+		self.px = px
+		self.py = py
+		self.width = width
+		self.len = len
+         
+		self.paddle = turtle.Turtle()       
+		self.paddle.speed(0)
+		self.paddle.shape(self.shape)
+		self.paddle.color(self.color)
+		self.paddle.shapesize(stretch_wid=self.width,stretch_len=self.len)
+		self.paddle.penup()
+		self.paddle.goto(self.px, self.py)
+   
+	def paddle_up(self):
+		y = self.paddle.ycor()
+		if y < 245:
+			y += 30
+			self.paddle.sety(y)
+	
+	def paddle_down(self):
+		
+		y = self.paddle.ycor()
+		if y > -245:
+			y -= 30
+		self.paddle.sety(y)
+class Paddle2:
+	
+	def __init__(self, color, px, py, shape="square", width=5, len=1):
+		
+		self.shape = shape
+		self.color = color
+		self.px = px
+		self.py = py
+		self.width = width
+		self.len = len
+         
+		self.paddle2 = turtle.Turtle()       
+		self.paddle2.speed(0)
+		self.paddle2.shape(self.shape)
+		self.paddle2.color(self.color)
+		self.paddle2.shapesize(stretch_wid=self.width,stretch_len=self.len)
+		self.paddle2.penup()
+		self.paddle2.goto(self.px, self.py)   
+   
+	def paddle_up(self):  
+		y = self.paddle.ycor()
+		if y < 245:
+			y += 30
+			self.paddle.sety(y)
+	
+	def paddle_down(self):
+		
+		y = self.paddle.ycor()
+		if y > -245:
+			y -= 30
+		self.paddle.sety(y)
+P1 = Paddle1("red", -350, 0)
+P2 = Paddle2("red", 350, 0)
+
+class Ball1:
+	def __init__(self, color, dx=3, dy=-3, shape="circle", posx=0, posy=0, width=2, len=2):
+		
+		self.shape = shape
+		self.color = color
+		self.dx = dx
+		self.dy = dy
+		self.posx = posx
+		self.posy = posy    
+		self.width = width
+		self.len = len
+		
+		self.Ball1 = turtle.Turtle()
+		self.Ball1.speed(0)
+		self.Ball1.shape(self.shape)
+		self.Ball1.color(self.color)
+		self.Ball1.penup()
+		self.Ball1.goto(self.posx, self.posy)
+		self.Ball1.shapesize(stretch_wid=self.width,stretch_len=self.len)
+B1 = Ball1("Blue", dx=3, dy=-3)
+window.listen()
+window.onkeypress(Paddle1.paddle_up, "w")
+window.onkeypress(Paddle1.paddle_down, "s")
+window.onkeypress(Paddle2.paddle_up, "Up")
+window.onkeypress(Paddle2.paddle_down, "Down")
+
+
+while True:
+	window.update()
+	time.sleep(0.001)
